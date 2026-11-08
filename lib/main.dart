@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'register.dart';
+import 'dashboard_chat.dart';
 
 void main() {
   runApp(const BrudyApp());
@@ -64,16 +66,21 @@ class _LoginPageState extends State<LoginPage> {
     if (!mounted) return;
     setState(() => _isLoading = false);
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Login sebagai ${_emailController.text}')),
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const DashboardChatPage()),
+      (route) => false,
     );
   }
 
   void _goToRegister() {
     // TODO: Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage()));
-    ScaffoldMessenger.of(
+    Navigator.push(
       context,
-    ).showSnackBar(const SnackBar(content: Text('Menuju halaman Buat Akun')));
+      MaterialPageRoute(
+          builder: (context) => const RegisterPage(),
+        )
+    );
   }
 
   @override
