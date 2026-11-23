@@ -1,5 +1,6 @@
-import 'package:brudy/chatroom_page.dart';
 import 'package:flutter/material.dart';
+import 'package:brudy/chatroom_page.dart';
+import 'package:brudy/profil_diri.dart';
 
 class DashboardChatPage extends StatefulWidget {
   const DashboardChatPage({super.key});
@@ -35,7 +36,9 @@ class _DashboardChatPageState extends State<DashboardChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE6E8F1), // Latar belakang abu-kebiruan senada
+      backgroundColor: const Color(
+        0xFFE6E8F1,
+      ), // Latar belakang abu-kebiruan senada
       body: SafeArea(
         child: Column(
           children: [
@@ -76,7 +79,12 @@ class _DashboardChatPageState extends State<DashboardChatPage> {
               ),
             ),
             const SizedBox(height: 16),
-            const Divider(color: Color(0xFFB0BACB), thickness: 1, indent: 24, endIndent: 24),
+            const Divider(
+              color: Color(0xFFB0BACB),
+              thickness: 1,
+              indent: 24,
+              endIndent: 24,
+            ),
             const SizedBox(height: 8),
 
             // ---------- Daftar Chat (ListView) ----------
@@ -96,9 +104,10 @@ class _DashboardChatPageState extends State<DashboardChatPage> {
                           builder: (context) => ChatRoomPage(
                             peerName: chat['name']!,
                             peerImage: chat['image']!,
-                            isOnline: true, // Atur status online sesuai kebutuhan
+                            isOnline:
+                                true, // Atur status online sesuai kebutuhan
                           ),
-                        )
+                        ),
                       );
                     },
                     child: Container(
@@ -129,16 +138,17 @@ class _DashboardChatPageState extends State<DashboardChatPage> {
                               child: Image.asset(
                                 chat['image']!,
                                 fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) => const Icon(
-                                  Icons.person,
-                                  size: 32,
-                                  color: Color(0xFF1E2B50),
-                                ),
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Icon(
+                                      Icons.person,
+                                      size: 32,
+                                      color: Color(0xFF1E2B50),
+                                    ),
                               ),
                             ),
                           ),
                           const SizedBox(width: 16),
-                          
+
                           // Nama dan Pesan
                           Expanded(
                             child: Column(
@@ -178,7 +188,7 @@ class _DashboardChatPageState extends State<DashboardChatPage> {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   );
                 },
               ),
@@ -210,14 +220,23 @@ class _DashboardChatPageState extends State<DashboardChatPage> {
                   ),
                   onPressed: () => setState(() => _currentIndex = 0),
                 ),
-                const SizedBox(width: 40), // Ruang kosong untuk tombol plus melayang
+                const SizedBox(
+                  width: 40,
+                ), // Ruang kosong untuk tombol plus melayang
                 IconButton(
                   icon: Icon(
                     Icons.person_outline,
                     color: _currentIndex == 1 ? Colors.white : Colors.white60,
                     size: 28,
                   ),
-                  onPressed: () => setState(() => _currentIndex = 1),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfilePage(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
